@@ -57,7 +57,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         setContentView(R.layout.weather_info);
         mUpdateBtn = (ImageView) findViewById(R.id.title_update_btn);
         mUpdateBtn.setOnClickListener(this);
-
         initView();
     }
 
@@ -86,6 +85,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     void updateTodayWeather(TodayWeather todayWeather){
+        int pm25;
+
         Log.d("myapp3", todayWeather.toString());
         cityTv.setText(todayWeather.getCity());
         timeTv.setText(todayWeather.getUpdatetime()+ "发布");
@@ -96,6 +97,24 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         temperatureTv.setText(todayWeather.getHigh()+"~"+todayWeather.getLow());
         climateTv.setText(todayWeather.getType());
         windTv.setText("风力:"+todayWeather.getFengli());
+
+        pm25=Integer.parseInt(todayWeather.getPm25());
+        if ((pm25 >= 0) && (pm25 <= 50)){
+            pmImg.setImageDrawable(getResources().getDrawable(R.drawable.biz_plugin_weather_0_50));
+        }
+        else if ((pm25 >= 51) && (pm25 <= 100)){
+            pmImg.setImageDrawable(getResources().getDrawable(R.drawable.biz_plugin_weather_51_100));
+        }
+        else if ((pm25 >= 101) && (pm25 <= 150)){
+            pmImg.setImageDrawable(getResources().getDrawable(R.drawable.biz_plugin_weather_101_150));
+        }
+        else if ((pm25 >= 151) && (pm25 <= 200)){
+            pmImg.setImageDrawable(getResources().getDrawable(R.drawable.biz_plugin_weather_151_200));
+        }
+        else if ((pm25 >= 201) && (pm25 <= 300)){
+            pmImg.setImageDrawable(getResources().getDrawable(R.drawable.biz_plugin_weather_201_300));
+        }
+
         Toast.makeText(MainActivity.this,"更新成功！",Toast.LENGTH_SHORT).show();
     }
 
