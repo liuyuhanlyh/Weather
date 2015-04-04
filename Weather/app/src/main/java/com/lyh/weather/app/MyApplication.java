@@ -21,7 +21,7 @@ public class MyApplication extends Application{
     private static final String TAG = "MyAPP";
     private static Application mApplication;
     private List<City> mCityList;
-    private CityDB mCityDB;
+    private static CityDB mCityDB;
 
     @Override
     public void onCreate(){
@@ -30,11 +30,14 @@ public class MyApplication extends Application{
         mApplication = this;
 
         mCityDB = openCityDB();
-        initCityList();
+        //initCityList();
     }
 
     public static Application getInstance(){
         return mApplication;
+    }
+    public static CityDB getCityDB(){
+        return mCityDB;
     }
 
     private CityDB openCityDB(){

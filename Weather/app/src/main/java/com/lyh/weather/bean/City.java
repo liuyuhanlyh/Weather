@@ -27,4 +27,20 @@ public class City {
     public String getCity(){
         return this.city;
     }
+
+    public void setNumber(String num){
+        this.number = num;
+    }
+
+    public String getNumber(){
+        return this.number;
+    }
+
+    public void setProvince(String province){
+        this.province = province;
+    }
+
+    public String getProvince(){
+        return this.province;
+    }
 }

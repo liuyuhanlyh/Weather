@@ -26,12 +26,12 @@ public class CityDB {
     public List<City> getAllCity(){
         List<City> list = new ArrayList<City>();
         Cursor c = db.rawQuery("select * from city", null);
+
         while (c.moveToNext()){
             String province = c.getString(c.getColumnIndex("province"));
-            Log.d("CityName", province);
             String city = c.getString(c.getColumnIndex("city"));
-            Log.d("CityName", city);
             String number = c.getString(c.getColumnIndex("number"));
+//            Log.d("cityNum",number);
             String allPY = c.getString(c.getColumnIndex("allpy"));
             String allFirstPY = c.getString(c.getColumnIndex("allfirstpy"));
             String firstPY = c.getString(c.getColumnIndex("firstpy"));

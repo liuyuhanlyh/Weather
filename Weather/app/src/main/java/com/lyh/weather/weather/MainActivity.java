@@ -41,6 +41,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private TextView cityTv, timeTv, humidityTv, weekTv, pmDataTv, pmQualityTv, temperatureTv, climateTv, windTv;
     private ImageView weatherImg, pmImg;
     private TodayWeather todayWeather;
+    private String cityCode;
 
     private static final int UPDATE_TODAY_WEATHER = 1;
     private Handler mHandler = new Handler(){
@@ -177,8 +178,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View view){
         if (view.getId() == R.id.title_update_btn){
             SharedPreferences sharedPreferences = getSharedPreferences("config",MODE_PRIVATE);
-            String cityCode = sharedPreferences.getString("main_city_code", "101010100");
-            Log.d("myWeather",cityCode);
+            cityCode = sharedPreferences.getString("main_city_code", "101010100");;
+
+            Log.d("myWeather cityCode",cityCode);
             if (NetUtil.getNetworkState(this) != NetUtil.NETWORN_NONE){
                 Log.d("myWeather", "网络OK");
                 queryWeatherCode(cityCode);
@@ -191,7 +193,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         else if (view.getId() == R.id.title_city_manager){
             Log.d("intent1", "OK");
             Intent intent=new Intent(MainActivity.this,SelectCity.class);
-            startActivity(intent);
+//            startActivity(intent);
+            startActivityForResult(intent, 1);
         }
     }
 
@@ -324,5 +327,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             e.printStackTrace();
         }
         return todayWeather;
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == 1 && resultCode == RESULT_OK){
+            cityCode = data.getStringExtra("name");
+        }
     }
 }
