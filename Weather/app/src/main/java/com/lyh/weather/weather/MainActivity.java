@@ -68,6 +68,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         mUpdateBtn.setOnClickListener(this);
         mCityBtn = (ImageView) findViewById(R.id.title_city_manager);
         mCityBtn.setOnClickListener(this);
+        SharedPreferences sharedPreferences = getSharedPreferences("config",MODE_PRIVATE);
+        cityCode = sharedPreferences.getString("main_city_code", "101010100");
         initView();
     }
 
@@ -177,8 +179,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     @Override
     public void onClick(View view){
         if (view.getId() == R.id.title_update_btn){
-            SharedPreferences sharedPreferences = getSharedPreferences("config",MODE_PRIVATE);
-            cityCode = sharedPreferences.getString("main_city_code", "101010100");;
+            Log.d("citycode1",cityCode);
+//            SharedPreferences sharedPreferences = getSharedPreferences("config",MODE_PRIVATE);
+//            cityCode = sharedPreferences.getString("main_city_code", "101010100");
+            Log.d("citycode2",cityCode);
 
             Log.d("myWeather cityCode",cityCode);
             if (NetUtil.getNetworkState(this) != NetUtil.NETWORN_NONE){
